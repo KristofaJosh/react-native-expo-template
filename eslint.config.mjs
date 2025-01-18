@@ -4,7 +4,7 @@ import tseslint from "typescript-eslint";
 import pluginReact from "eslint-plugin-react";
 import unusedImports from "eslint-plugin-unused-imports";
 import simpleImportSort from "eslint-plugin-simple-import-sort";
-// import importPlugin from "eslint-plugin-import";
+import testingLibrary from "eslint-plugin-testing-library";
 
 /** @type {import('eslint').Linter.Config[]} */
 export default [
@@ -13,6 +13,11 @@ export default [
   pluginJs.configs.recommended,
   ...tseslint.configs.recommended,
   pluginReact.configs.flat.recommended,
+  {
+    plugins: {
+      "testing-library/react": testingLibrary,
+    },
+  },
   {
     plugins: {
       "unused-imports": unusedImports,
