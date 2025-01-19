@@ -1,6 +1,6 @@
 import { render, screen, userEvent } from "@testing-library/react-native";
 
-import Button from "@/components/button";
+import Button from "@/components/ui/button/index";
 
 // It is recommended to use userEvent with fake timers
 // Some events involve duration, so your tests may take a long time to run.
