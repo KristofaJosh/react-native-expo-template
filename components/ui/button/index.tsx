@@ -18,12 +18,12 @@ const Button = ({
     <TouchableOpacity
       {...rest}
       className={cn(
-        "bg-primary items-center p-3 px-1",
-        "font-gfMedium rounded-md gap-1 justify-center",
+        "bg-black items-center p-3 px-4",
+        "rounded-md gap-1 justify-center h-[40px]",
         className,
       )}
     >
-      <Text className={cn("text-white font-gfRegular text-sm", textClassName)}>
+      <Text className={cn("text-white font-semibold text-sm", textClassName)}>
         {children ?? text}
       </Text>
     </TouchableOpacity>

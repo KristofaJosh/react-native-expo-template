@@ -24,15 +24,8 @@ export default function OnboardingLayout() {
       <Button
         text={"Skip"}
         onPress={handleSkipOnboarding}
-        style={{
-          backgroundColor: "red",
-          position: "absolute",
-          borderRadius: 25,
-          bottom: insets.bottom,
-          left: 16,
-          width: 50,
-          height: 50,
-        }}
+        className={"absolute bottom-0 rounded-full left-4 w-[40px] px-1"}
+        style={{ bottom: insets.bottom }}
       />
     </>
   );

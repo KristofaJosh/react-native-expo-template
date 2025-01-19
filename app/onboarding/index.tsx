@@ -1,20 +1,24 @@
-import { usePathname } from "expo-router";
+import { router } from "expo-router";
 import { useRef, useState } from "react";
 import {
   Animated,
   FlatList,
+  Text,
   useWindowDimensions,
   View,
   ViewToken,
 } from "react-native";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
+import {
+  SafeAreaView,
+  useSafeAreaInsets,
+} from "react-native-safe-area-context";
 
-import { handleSkipOnboarding } from "@/components/onboarding/actions";
 import Footer from "@/components/onboarding/footer";
-import Header from "@/components/onboarding/header";
 import { onboardSlideData } from "@/components/onboarding/onboard-slide-data";
 import { RenderItem } from "@/components/onboarding/render-item";
 import Button from "@/components/ui/button";
+
+const viewConfig = { viewAreaCoveragePercentThreshold: 40 };
 
 const Onboarding = () => {
   const insets = useSafeAreaInsets();
@@ -23,9 +27,8 @@ const Onboarding = () => {
 
   const [currentIndex, setCurrentIndex] = useState(0);
 
+  const listRef = useRef<FlatList>(null);
   const scrollXref = useRef(new Animated.Value(0)).current;
-
-  const viewConfig = useRef({ viewAreaCoveragePercentThreshold: 40 }).current;
 
   const onViewableItemChanged = useRef(
     ({ viewableItems }: { viewableItems: ViewToken[] }) => {
@@ -33,22 +36,25 @@ const Onboarding = () => {
     },
   ).current;
 
-  const s = usePathname();
-  console.log(s);
+  const handleOnboardNav = () => {
+    if (currentIndex < onboardSlideData.length - 1) {
+      listRef.current?.scrollToIndex({
+        animated: true,
+        index: currentIndex + 1
+      })
+      return
+    }
+    router.replace("/onboarding/auth");
+  };
+
   return (
-    <View>
-      <View
-        style={{
-          position: "absolute",
-          top: insets.top,
-          left: 16,
-          right: 16,
-          zIndex: 1,
-        }}
-      >
-        <Header onSkip={handleSkipOnboarding} />
-      </View>
+    <SafeAreaView className={"flex-1 p-4"}>
+      <Text className={"text-5xl text-white font-bold z-10 shadow"}>
+        Artify
+      </Text>
+
       <FlatList
+        ref={listRef}
         style={{ width: dimensions.width, height: dimensions.height }}
         className={"absolute bottom-0"}
         data={onboardSlideData}
@@ -69,23 +75,21 @@ const Onboarding = () => {
         scrollEventThrottle={32}
       />
       <View
+        className={"absolute bottom-0 left-0 right-0"}
         style={{
-          position: "absolute",
           bottom: insets.bottom,
-          left: 16,
-          right: 16,
-          zIndex: 1,
         }}
       >
-        <View style={{ marginBottom: 90 }}>
-          <Footer current={currentIndex} data={onboardSlideData} />
-        </View>
-        <Button style={{
-          right: 16,
-          backgroundColor: "red",
-        }}>Next</Button>
+        <Footer current={currentIndex} data={onboardSlideData} />
+        <View className={"mb-20"} />
+        <Button
+          className={"absolute w-[90px] bottom-0 right-4"}
+          onPress={handleOnboardNav}
+        >
+          {currentIndex < onboardSlideData.length - 1 ? "Next" : "Get Started"}
+        </Button>
       </View>
-    </View>
+    </SafeAreaView>
   );
 };
 

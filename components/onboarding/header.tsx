@@ -1,35 +1,32 @@
-import { Text,TouchableOpacity, View } from "react-native";
+import { Text, TouchableOpacity, View } from "react-native";
+import { StyleProps } from "react-native-reanimated";
 
 import { cn } from "@/utils/tw-merge";
 
 const OnboardingHeader = ({
   onSkip,
   className,
+  style,
 }: {
   onSkip: () => void;
   className?: string;
+  style?: StyleProps
 }) => {
   return (
     <View
+      style={style}
       className={cn(
-        "max-w-[500px] justify-between flex-row items-center",
+        "w-full",
+        "justify-between flex-row items-center",
         className,
       )}
     >
-      <View />
-      <View className={"h-[30px] w-[30px] relative left-2.5"}>
-        {/*<Image*/}
-        {/*  source={require("@/assets/images/onboarding/logo.png")}*/}
-        {/*  className="inset-0 w-full h-full"*/}
-        {/*  resizeMode="cover"*/}
-        {/*/>*/}
-        <Text>
-          Artify
-        </Text>
-      </View>
+      <Text className={'text-4xl text-white font-bold'}>
+        Artify
+      </Text>
       <TouchableOpacity onPress={onSkip}>
-        <Text className={"text-white text-sm font-gfMedium"}>
-          Skip
+        <Text className={"text-sm text-white font-semibold"}>
+          Login
         </Text>
       </TouchableOpacity>
     </View>

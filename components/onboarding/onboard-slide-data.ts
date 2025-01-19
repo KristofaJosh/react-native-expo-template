@@ -1,7 +1,7 @@
 export const onboardSlideData = [
   {
     id: 1,
-    title: "welcome to Artify",
+    title: "welcome",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi corporis dolorem eius facere fugiat hic, ipsam libero quidem, quos, recusandae saepe sapiente sint veniam!",
     backgroundImage: require("@/assets/images/onboarding/slide-1.jpg"),
