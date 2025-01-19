@@ -20,6 +20,7 @@ const Auth = () => {
             }
           >
             <Image
+              blurRadius={2}
               source={require("@/assets/images/onboarding/slide-4.jpg")}
               className="w-full h-full absolute left-0 right-0"
               resizeMode="cover"

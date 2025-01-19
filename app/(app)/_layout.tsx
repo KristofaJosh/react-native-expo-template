@@ -4,7 +4,7 @@ import {SafeAreaView} from "react-native-safe-area-context";
 
 const Layout = () => {
   // const { session, isLoading } = useSession();
-  const { session, isLoading } = { session: false, isLoading: false };
+  const { session, isLoading } = { session: true, isLoading: false };
 
   // You can keep the splash screen open, or render a loading screen like we do here.
   if (isLoading) {

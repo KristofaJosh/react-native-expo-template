@@ -36,7 +36,7 @@ exports[`<Button /> should render correctly 1`] = `
   }
 >
   <Text
-    className="text-white font-gfRegular text-sm"
+    className="text-white font-semibold text-sm"
   >
     Click me
   </Text>
