@@ -45,5 +45,10 @@ export default [
       "simple-import-sort/exports": "error",
     },
   },
-  { rules: { "react/react-in-jsx-scope": "off" } },
+  {
+    rules: {
+      "react/react-in-jsx-scope": "off",
+      "@typescript-eslint/no-require-imports": "off",
+    },
+  },
 ];
