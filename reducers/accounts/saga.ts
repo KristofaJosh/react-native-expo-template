@@ -1,14 +1,22 @@
-import { put, takeEvery } from "redux-saga/effects";
+import { router } from "expo-router";
+import { all, call, put, takeEvery } from "redux-saga/effects";
 
-import { resetAuth } from "@/reducers/auth/reducer";
+import { resetAppAction } from "@/reducers/accounts/reducer";
+import { resetUser } from "@/reducers/auth/reducer";
 import { resetUserOnboarded } from "@/reducers/onboarding/reducer";
 
+const gotoOnboarding = () => {
+  router.push("/onboarding");
+};
+
 export function* workerResetAppState() {
-  yield put(resetUserOnboarded());
-  yield put(resetAuth());
+  yield all([
+    put(resetUser()),
+    put(resetUserOnboarded()),
+    call(gotoOnboarding),
+  ]);
 }
 
 export function* accountSagas() {
-  console.log(resetAuth().type);
-  yield takeEvery(resetAuth().type, workerResetAppState);
+  yield takeEvery(resetAppAction.type, workerResetAppState);
 }

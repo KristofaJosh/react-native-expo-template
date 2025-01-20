@@ -20,6 +20,7 @@ const curriedFetcher = curry(fetcher);
 const ART_URL = process.env.EXPO_PUBLIC_GALLERY_BASE_API as string;
 const JSON_URL = process.env.EXPO_PUBLIC_JSON_BASE_URL as string;
 
+// TODO:  improve partial application
 export const fetchArt =
   curriedFetcher(
     ART_URL,

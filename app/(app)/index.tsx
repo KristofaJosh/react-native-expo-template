@@ -3,6 +3,7 @@
  * Show the logged user and other users to illustrate fetching data from the server.
  */
 
+import { router } from "expo-router";
 import { useEffect } from "react";
 import {
   ActivityIndicator,
@@ -35,9 +36,16 @@ export default function Home() {
             last login: {lastLogin || "Today"}
           </Typography>
         </View>
-        <TouchableOpacity onPress={() => dispatch(getUsersFetch())}>
-          <Typography className={"text-xs font-bold"}>Refresh</Typography>
-        </TouchableOpacity>
+        <View className={'justify-between'}>
+          <TouchableOpacity onPress={() => dispatch(getUsersFetch())}>
+            <Typography className={"text-xs font-bold"}>Refresh</Typography>
+          </TouchableOpacity>
+          {!session?.username && (
+            <TouchableOpacity onPress={() => router.push('/onboarding/auth')}>
+              <Typography className={"text-xs font-bold"}>Login</Typography>
+            </TouchableOpacity>
+          )}
+        </View>
       </View>
       {error && <Typography>{error}</Typography>}
       {isLoading && (

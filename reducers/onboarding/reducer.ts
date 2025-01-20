@@ -19,7 +19,6 @@ const onboardingReducer = createSlice({
     },
   },
 });
-console.log(onboardingReducer.actions.setUserOnboarded().type);
 
 // Selectors
 const selectOnboardingState = (state: RootState) => prop(slice, state);

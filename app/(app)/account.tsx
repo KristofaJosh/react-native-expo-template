@@ -3,7 +3,8 @@ import { Text, View } from "react-native";
 
 import Button from "@/components/ui/button";
 import { useAppDispatch } from "@/hooks/redux";
-import { logoutUser, resetAuth } from "@/reducers/auth/reducer";
+import { resetAppAction } from "@/reducers/accounts/reducer";
+import { logoutUser } from "@/reducers/auth/reducer";
 
 const Account = () => {
   const dispatch = useAppDispatch();
@@ -14,7 +15,7 @@ const Account = () => {
   };
 
   const handleReset = () => {
-    dispatch(resetAuth());
+    dispatch(resetAppAction());
   };
 
   return (

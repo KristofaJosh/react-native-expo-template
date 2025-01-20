@@ -7,11 +7,9 @@ import {
   getUsersSuccess,
 } from "@/reducers/auth/reducer";
 
-const fetchUsers = () => fetchJson("/users", { method: "GET" }).then(r => r);
-
 export function* workerFetchUsers() {
   try {
-    const users = yield call(fetchUsers);
+    const users = yield call(fetchJson, "/users", { method: "GET" });
     yield put(getUsersSuccess(users));
   } catch (error) {
     yield put(getUsersFail());
@@ -19,5 +17,5 @@ export function* workerFetchUsers() {
 }
 
 export function* authSagas() {
-  yield takeEvery(getUsersFetch().type, workerFetchUsers);
+  yield takeEvery(getUsersFetch.type, workerFetchUsers);
 }

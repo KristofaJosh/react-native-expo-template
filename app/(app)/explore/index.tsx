@@ -1,5 +1,5 @@
 import { Link } from "expo-router";
-import { useCallback, useEffect, useState } from "react";
+import { useEffect } from "react";
 import {
   ActivityIndicator,
   FlatList,
@@ -11,7 +11,12 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import Typography from "@/components/ui/typography";
 import { useAppDispatch, useAppSelector } from "@/hooks/redux";
-import { getArtworks, selectExploreState } from "@/reducers/explore/reducer";
+import {
+  getArtworks,
+  getIsRefreshing,
+  selectExploreState,
+  setRefreshing,
+} from "@/reducers/explore/reducer";
 import { createImageLink } from "@/utils/createImageLink";
 
 const trimTitle = (title: string) => {
@@ -22,6 +27,8 @@ const trimTitle = (title: string) => {
 };
 
 const Explore = () => {
+  const refreshing = useAppSelector(getIsRefreshing);
+
   const { bottom } = useSafeAreaInsets();
 
   const dispatch = useAppDispatch();
@@ -32,15 +39,7 @@ const Explore = () => {
     pagination, // infinite scroll with this
   } = useAppSelector(selectExploreState);
 
-  const [refreshing, setRefreshing] = useState(false);
-
-
   useEffect(() => {
-    dispatch(getArtworks());
-  }, []);
-
-  const onRefresh = useCallback(() => {
-    setRefreshing(true);
     dispatch(getArtworks());
   }, []);
 
@@ -56,7 +55,10 @@ const Explore = () => {
         className={""}
         showsVerticalScrollIndicator={false}
         refreshControl={
-          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+          <RefreshControl
+            refreshing={refreshing}
+            onRefresh={() => dispatch(setRefreshing())}
+          />
         }
         data={artworks}
         renderItem={({ item, ...props }) => (

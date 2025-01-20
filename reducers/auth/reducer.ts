@@ -41,10 +41,12 @@ const authReducer = createSlice({
       state.error = "Failed to fetch users";
     },
     logoutUser(state) {
-      state = initialState;
+      state.session = null;
+      state.error = null;
+      state.users = [];
     },
-    resetAuth(state) {
-      state = initialState;
+    resetUser() {
+      return initialState;
     },
     loginUser(state, action: PayloadAction<AuthInput>) {
       state.lastLogin = new Date().toLocaleString();
@@ -85,9 +87,9 @@ export const getAuthIsLoading = compose(prop("isLoading"), selectAuthState);
 export const getLastLogin = compose(prop("lastLogin"), selectAuthState);
 
 export const {
-  resetAuth,
   loginUser,
   logoutUser,
+  resetUser,
   getUsersFail,
   getUsersSuccess,
   getUsersFetch,
