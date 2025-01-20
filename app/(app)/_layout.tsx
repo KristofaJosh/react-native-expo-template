@@ -9,7 +9,6 @@ import { selectHasOnboarded } from "@/reducers/onboarding/reducer";
 
 const Layout = () => {
   const hasOnboarded = useAppSelector(selectHasOnboarded);
-  console.log({hasOnboarded});
 
   // Require onboarding to be run in (app) group's layout.
   if (!hasOnboarded) {
@@ -29,7 +28,7 @@ const Layout = () => {
           tabBarStyle: Platform.select({
             ios: {
               // Use a transparent background on iOS to show the blur effect
-              // position: "absolute",
+              position: "absolute",
             },
             default: {},
           }),
