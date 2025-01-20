@@ -2,16 +2,16 @@
 
 # Task
 
-- The app should have all necessary tools set up (Linting, Prettier, React Testing Library etc.),
-- It should use Redux for state management with sagas,
-- it should have a stack navigator for an onboarding flow,
-- and then go to a tab navigator. (3 screens in total)
-- Onboarding flow should have the user enter their name,
-- - put that in the store and persist it across sessions (when closing and re-opening the app).
-- The tab navigator should then have one tab where it fetches users the first time that the page loades,
-- - and a button to refetch users. The other tab should display the name that the user entered.
-- **Focus on logic**, but make the app look as good as possible given the limited time. 
-- You may use RNE or something similar.
+- The app has all necessary tools set up (Linting, Prettier, React Testing Library etc.),
+- It uses Redux for state management with sagas,
+- it has a stack navigator for an onboarding flow,
+- and a tab navigator. (3 screens in total)
+- Onboarding flow allows user enter their name,
+- - puts that in the store and persist it across sessions (when closing and re-opening the app).
+- The tab navigator has one tab where it fetches users the first time that the page loades,
+- - and a button to refetch users.
+- **Focus is on logic**, while making the app look as good as possible given the limited time. 
+- Nativewind was used for this, but you may use RNE or something similar.
 
 
 This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
