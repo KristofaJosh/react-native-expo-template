@@ -1,8 +1,8 @@
-import { useSearchParams } from "expo-router/build/hooks";
+import { useLocalSearchParams } from "expo-router";
 import { Text,View } from "react-native";
 
 const ArtId = () => {
-  const params = useSearchParams();
+  const params = useLocalSearchParams();
   console.log(params);
   return (
     <View>

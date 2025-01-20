@@ -13,9 +13,9 @@ import {
   useSafeAreaInsets,
 } from "react-native-safe-area-context";
 
-import Footer from "@/components/onboarding/footer";
+import Footer from "@/components/onboarding/footer-component";
 import { onboardSlideData } from "@/components/onboarding/onboard-slide-data";
-import { RenderItem } from "@/components/onboarding/render-item";
+import { RenderItem } from "@/components/onboarding/render-item-component";
 import Button from "@/components/ui/button";
 
 const viewConfig = { viewAreaCoveragePercentThreshold: 40 };
@@ -83,7 +83,7 @@ const Onboarding = () => {
         <Footer current={currentIndex} data={onboardSlideData} />
         <View className={"mb-20"} />
         <Button
-          className={"absolute w-[90px] bottom-0 right-4"}
+          className={"absolute min-w-[90px] bottom-0 right-4"}
           onPress={handleOnboardNav}
         >
           {currentIndex < onboardSlideData.length - 1 ? "Next" : "Get Started"}

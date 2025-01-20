@@ -4,15 +4,22 @@
  * @see https://docs.expo.dev/router/reference/authentication/
  */
 
-import { Stack } from "expo-router";
+import { router, Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
-import { handleSkipOnboarding } from "@/components/onboarding/actions";
+import { setUserOnboarded } from "@/components/onboarding/reducer";
 import Button from "@/components/ui/button";
+import { useAppDispatch } from "@/hooks/redux";
 
 export default function OnboardingLayout() {
   const insets = useSafeAreaInsets();
+  const dispatch = useAppDispatch();
+
+  const handleSkipOnboarding = () => {
+    dispatch(setUserOnboarded());
+    router.replace("/(app)");
+  }
 
   return (
     <>

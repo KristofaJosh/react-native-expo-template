@@ -5,7 +5,6 @@ import Button from "@/components/ui/button";
 import Textbox from "@/components/ui/text-box";
 
 const Auth = () => {
-
   return (
     <>
       <View className={"flex-1 bg-gray-100"}>
@@ -34,7 +33,11 @@ const Auth = () => {
           </View>
           <View className={"p-4 gap-8"}>
             <View className={"gap-4 mb-8"}>
-              <Textbox label={"username"} />
+              <Textbox
+                label={"username"}
+                autoCapitalize={"none"}
+                autoCorrect={false}
+              />
               <Textbox
                 label={"password"}
                 autoCapitalize={"none"}
@@ -60,9 +63,7 @@ const Auth = () => {
                 </Link>{" "}
                 and{" "}
                 <Link href={"/"} asChild>
-                  <Text className={"text-black"}>
-                    privacy policy
-                  </Text>
+                  <Text className={"text-black"}>privacy policy</Text>
                 </Link>
                 .
               </Text>

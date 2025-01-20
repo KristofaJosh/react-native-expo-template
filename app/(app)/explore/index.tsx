@@ -1,6 +1,7 @@
 import { Link } from "expo-router";
 import { useCallback, useEffect, useState } from "react";
 import {
+  ActivityIndicator,
   FlatList,
   Image,
   RefreshControl,
@@ -22,6 +23,7 @@ const trimTitle = (title: string) => {
 const Explore = () => {
   const { bottom } = useSafeAreaInsets();
 
+  const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
 
   const [artworks, setArtworks] = useState<Artwork[]>([]);
@@ -29,7 +31,7 @@ const Explore = () => {
   useEffect(() => {
     (async () => {
       try {
-        setRefreshing(true);
+        setLoading(true);
 
         const res = (await fetchArt(
           "/artworks?limit=10",
@@ -38,7 +40,7 @@ const Explore = () => {
         console.log(res.pagination);
         setArtworks(res.data);
       } finally {
-        setRefreshing(false);
+        setLoading(false);
       }
     })();
   }, []);
@@ -51,8 +53,11 @@ const Explore = () => {
   }, []);
 
   return (
-    <View className={"flex-1 p-4"}>
+    <View className={"flex-1 p-4 relative bg-white"}>
       <Typography className={"text-2xl font-semibold py-4"}>Explore</Typography>
+      {loading && <View className={"justify-center items-center h-[80%] w-full"}>
+        <ActivityIndicator />
+      </View>}
       <FlatList
         className={""}
         showsVerticalScrollIndicator={false}
@@ -61,7 +66,7 @@ const Explore = () => {
         }
         data={artworks}
         renderItem={({ item, ...props }) => (
-          <Link href={`../${item.id}`} asChild>
+          <Link href={`/explore/${item.id}`} asChild>
             <View
               className={
                 "relative h-80 mb-8 rounded-3xl overflow-hidden border border-gray-300 shadow"

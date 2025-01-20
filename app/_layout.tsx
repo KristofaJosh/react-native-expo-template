@@ -4,8 +4,8 @@ import { useFonts } from "expo-font";
 import { Slot } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import { StatusBar } from "expo-status-bar";
-import { useEffect } from "react";
-import { Text, View } from "react-native";
+
+import StoreProvider from "@/redux/store-provider";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -14,32 +14,12 @@ export default function RootLayout() {
     SpaceMono: require("../assets/fonts/SpaceMono-Regular.ttf"),
   });
 
-  useEffect(() => {
-    if (loaded) {
-      SplashScreen.hideAsync();
-    }
-  }, [loaded]);
-
-  if (!loaded) {
-    // animated loader
-    return (
-      <View
-        style={{
-          flex: 1,
-          justifyContent: "center",
-          alignItems: "center",
-          backgroundColor: "white",
-        }}
-      >
-        <Text>Loading...</Text>
-      </View>
-    );
-  }
+  if (!loaded) return null;
 
   return (
-    <>
-        <StatusBar style="dark" />
-        <Slot />
-    </>
+    <StoreProvider>
+      <StatusBar style="dark" />
+      <Slot />
+    </StoreProvider>
   );
 }
