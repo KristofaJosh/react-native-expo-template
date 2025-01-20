@@ -8,9 +8,9 @@ import { router, Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
-import { setUserOnboarded } from "@/components/onboarding/reducer";
 import Button from "@/components/ui/button";
 import { useAppDispatch } from "@/hooks/redux";
+import { setUserOnboarded } from "@/reducers/onboarding/reducer";
 
 export default function OnboardingLayout() {
   const insets = useSafeAreaInsets();

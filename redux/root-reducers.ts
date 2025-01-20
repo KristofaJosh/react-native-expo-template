@@ -1,9 +1,9 @@
 import { combineReducers } from "redux";
 
-import authReducer, { slice as authSlice } from "@/components/auth/reducer";
+import authReducer, { slice as authSlice } from "@/reducers/auth/reducer";
 import onboardingReducer, {
   slice as onboardingSlice,
-} from "@/components/onboarding/reducer";
+} from "@/reducers/onboarding/reducer";
 
 const rootReducer = combineReducers({
   [onboardingSlice]: onboardingReducer,

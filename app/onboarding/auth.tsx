@@ -48,12 +48,6 @@ const Auth = () => {
             </View>
             <View className={"gap-4"}>
               <Button>Login</Button>
-              <Button
-                className={"border bg-gray-500 border-gray-500"}
-                textClassName={"text-white"}
-              >
-                Create Account
-              </Button>
             </View>
             <View>
               <Text className={"text-center text-sm text-gray-500 px-1"}>

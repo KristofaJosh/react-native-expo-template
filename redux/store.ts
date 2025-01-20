@@ -24,8 +24,6 @@ export const store = configureStore({
     ),
 });
 
-console.log(store.getState());
-
 sagaMiddleware.run(rootSaga);
 
 export const persistor = persistStore(store);

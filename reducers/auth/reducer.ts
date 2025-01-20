@@ -11,20 +11,40 @@ type AuthState = {
   lastLogin: null | string;
   session: User | null;
   isLoading: boolean;
+  error: null | string;
+  users: User[];
 };
 
 export const initialState: AuthState = {
   lastLogin: null,
   session: null,
   isLoading: false,
+  error: null,
+  users: [],
 };
 
 const authReducer = createSlice({
   name: slice,
   initialState,
   reducers: {
-    registerUser(state, action: PayloadAction<AuthInput>) {
-      state.session = action as any;
+    getUsersSuccess(state, action: PayloadAction<User[]>) {
+      state.isLoading = false;
+      state.error = null;
+      state.users = action.payload;
+    },
+    getUsersFetch(state) {
+      state.isLoading = true;
+    },
+    getUsersFail(state) {
+      // typically we use actual error here
+      state.isLoading = false;
+      state.error = "Failed to fetch users";
+    },
+    logoutUser(state) {
+      state = initialState;
+    },
+    resetAuth(state) {
+      state = initialState;
     },
     loginUser(state, action: PayloadAction<AuthInput>) {
       state.session = action as any;
@@ -41,6 +61,12 @@ export const getAuthIsLoading = compose(prop("isLoading"), selectAuthState);
 
 export const getLastLogin = compose(prop("lastLogin"), selectAuthState);
 
-export const { registerUser, loginUser } = authReducer.actions;
+export const {
+  resetAuth,
+  loginUser,
+  getUsersFail,
+  getUsersSuccess,
+  getUsersFetch,
+} = authReducer.actions;
 
 export default authReducer.reducer;

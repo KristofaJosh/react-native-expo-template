@@ -2,6 +2,7 @@ import { Text, View } from "react-native";
 
 import Button from "@/components/ui/button";
 import { useAppDispatch } from "@/hooks/redux";
+import { resetAuth } from "@/reducers/auth/reducer";
 
 const Account = () => {
   const dispatch = useAppDispatch();
@@ -11,7 +12,7 @@ const Account = () => {
   };
 
   const handleReset = () => {
-    dispatch({ type: "RESET" });
+    dispatch(resetAuth());
   };
 
   return (
