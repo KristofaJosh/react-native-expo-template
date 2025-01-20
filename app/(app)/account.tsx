@@ -20,7 +20,7 @@ const Account = () => {
   return (
     <View className={"flex-1 p-4 gap-4 bg-white"}>
       <Text className={"text-3xl"}>Account</Text>
-      <View className={"h-[85%]"}>
+      <View className={"h-[75%]"}>
         <Text className={"text-sm"}>
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias
           aliquam aliquid amet aut blanditiis cumque delectus doloremque dolores
