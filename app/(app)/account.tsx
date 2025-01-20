@@ -1,14 +1,16 @@
+import { router } from "expo-router";
 import { Text, View } from "react-native";
 
 import Button from "@/components/ui/button";
 import { useAppDispatch } from "@/hooks/redux";
-import { resetAuth } from "@/reducers/auth/reducer";
+import { logoutUser, resetAuth } from "@/reducers/auth/reducer";
 
 const Account = () => {
   const dispatch = useAppDispatch();
 
   const handleLogout = () => {
-    dispatch({ type: "RESET" });
+    dispatch(logoutUser());
+    router.push("/onboarding/auth");
   };
 
   const handleReset = () => {

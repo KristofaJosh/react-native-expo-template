@@ -1,10 +1,24 @@
-import { Link } from "expo-router";
+import { Link, router } from "expo-router";
+import { trim } from "ramda";
+import { useState } from "react";
 import { Image, Text, View } from "react-native";
 
 import Button from "@/components/ui/button";
 import Textbox from "@/components/ui/text-box";
+import { useAppDispatch } from "@/hooks/redux";
+import { loginUser } from "@/reducers/auth/reducer";
 
 const Auth = () => {
+  const dispatch = useAppDispatch();
+
+  const [inputState, setInputState] = useState({ username: "", password: "" });
+
+  const handleLogin = () => {
+    if (!trim(inputState?.username)) return;
+    dispatch(loginUser(inputState));
+    router.replace("/(app)");
+  };
+
   return (
     <>
       <View className={"flex-1 bg-gray-100"}>
@@ -37,6 +51,9 @@ const Auth = () => {
                 label={"username"}
                 autoCapitalize={"none"}
                 autoCorrect={false}
+                onChangeText={(text) =>
+                  setInputState({ ...inputState, username: text })
+                }
               />
               <Textbox
                 label={"password"}
@@ -44,10 +61,13 @@ const Auth = () => {
                 autoCorrect={false}
                 secureTextEntry={true}
                 textContentType={"password"}
+                onChangeText={(text) =>
+                  setInputState({ ...inputState, password: text })
+                }
               />
             </View>
             <View className={"gap-4"}>
-              <Button>Login</Button>
+              <Button onPress={handleLogin}>Login</Button>
             </View>
             <View>
               <Text className={"text-center text-sm text-gray-500 px-1"}>

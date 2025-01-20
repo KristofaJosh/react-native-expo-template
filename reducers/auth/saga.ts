@@ -14,7 +14,6 @@ export function* workerFetchUsers() {
     const users = yield call(fetchUsers);
     yield put(getUsersSuccess(users));
   } catch (error) {
-    console.log(error);
     yield put(getUsersFail());
   }
 }

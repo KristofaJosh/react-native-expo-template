@@ -10,7 +10,8 @@ import {
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import Typography from "@/components/ui/typography";
-import { fetchArt } from "@/lib/fetcher";
+import { useAppDispatch, useAppSelector } from "@/hooks/redux";
+import { getArtworks, selectExploreState } from "@/reducers/explore/reducer";
 import { createImageLink } from "@/utils/createImageLink";
 
 const trimTitle = (title: string) => {
@@ -23,41 +24,34 @@ const trimTitle = (title: string) => {
 const Explore = () => {
   const { bottom } = useSafeAreaInsets();
 
-  const [loading, setLoading] = useState(true);
+  const dispatch = useAppDispatch();
+
+  const {
+    isLoading: loading,
+    data: artworks,
+    pagination, // infinite scroll with this
+  } = useAppSelector(selectExploreState);
+
   const [refreshing, setRefreshing] = useState(false);
 
-  const [artworks, setArtworks] = useState<Artwork[]>([]);
 
   useEffect(() => {
-    (async () => {
-      try {
-        setLoading(true);
-
-        const res = (await fetchArt(
-          "/artworks?limit=10",
-          {},
-        )) as ArtAPIResponseArtworks;
-        console.log(res.pagination);
-        setArtworks(res.data);
-      } finally {
-        setLoading(false);
-      }
-    })();
+    dispatch(getArtworks());
   }, []);
 
   const onRefresh = useCallback(() => {
     setRefreshing(true);
-    setTimeout(() => {
-      setRefreshing(false);
-    }, 2000);
+    dispatch(getArtworks());
   }, []);
 
   return (
     <View className={"flex-1 p-4 relative bg-white"}>
       <Typography className={"text-2xl font-semibold py-4"}>Explore</Typography>
-      {loading && <View className={"justify-center items-center h-[80%] w-full"}>
-        <ActivityIndicator />
-      </View>}
+      {loading && (
+        <View className={"justify-center items-center h-[80%] w-full"}>
+          <ActivityIndicator />
+        </View>
+      )}
       <FlatList
         className={""}
         showsVerticalScrollIndicator={false}

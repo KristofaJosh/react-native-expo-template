@@ -10,6 +10,7 @@ import rootSaga from "./root-sagas";
 const persistConfig = {
   key: "artify:root",
   storage: AsyncStorage,
+  blacklist: ['explore']
 };
 
 const persistedReducer = persistReducer<RootState>(persistConfig, rootReducer);
