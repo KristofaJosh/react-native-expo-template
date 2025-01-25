@@ -1,10 +1,11 @@
-import { Link } from "expo-router";
+import { router } from "expo-router";
 import { useEffect } from "react";
 import {
   ActivityIndicator,
   FlatList,
   Image,
   RefreshControl,
+  TouchableOpacity,
   View,
 } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
@@ -61,11 +62,13 @@ const Explore = () => {
           />
         }
         data={artworks}
-        renderItem={({ item, ...props }) => (
-          <Link href={`/explore/${item.id}`} asChild>
+        renderItem={({ item, index, ...props }) => (
+          <TouchableOpacity
+            onPress={() => router.push(`/explore/${index}`)}
+          >
             <View
               className={
-                "relative h-80 mb-8 rounded-3xl overflow-hidden border border-gray-300 shadow"
+                "relative h-80 mb-8 rounded-3xl overflow-hidden border border-gray-300"
               }
             >
               <Image
@@ -97,7 +100,7 @@ const Explore = () => {
                 </Typography>
               </View>
             </View>
-          </Link>
+          </TouchableOpacity>
         )}
         keyExtractor={(item) => `${item.id}`}
         scrollEventThrottle={32}

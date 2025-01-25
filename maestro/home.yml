@@ -1,0 +1,11 @@
+appId: com.chrisjosh.rnpractice
+---
+- launchApp
+- assertVisible: 'Good day, Test user'
+- scroll
+- tapOn:
+    text: 'Refresh'
+    repeat: 2
+    delay: 2000
+- tapOn:
+    text: 'Explore'

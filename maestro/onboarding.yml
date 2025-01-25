@@ -1,0 +1,22 @@
+# https://maestro.mobile.dev/getting-started
+
+appId: com.chrisjosh.rnpractice
+---
+- launchApp
+- assertVisible: "Artify"
+- assertVisible: "Welcome"
+- assertVisible: "Skip"
+- assertVisible: "Next"
+- tapOn:
+    text: "Next"
+    repeat: 2
+- swipe:
+    direction: RIGHT
+- swipe:
+    direction: LEFT
+- tapOn: "Get Started"
+
+- tapOn: 'username'
+- inputText: 'Test user'
+- tapOn: "login"
+- assertVisible: 'Good day, Test user'

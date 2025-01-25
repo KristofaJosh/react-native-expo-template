@@ -7,10 +7,17 @@ import rootReducer, { RootState } from "@/redux/root-reducers";
 
 import rootSaga from "./root-sagas";
 
+const logger = (store) => (next) => (action) => {
+  console.log(">>> dispatching", action);
+  const result = next(action);
+  console.log(">>> next state", store.getState());
+  return result;
+};
+
 const persistConfig = {
   key: "artify:root",
   storage: AsyncStorage,
-  blacklist: ['explore']
+  blacklist: ["explore"],
 };
 
 const persistedReducer = persistReducer<RootState>(persistConfig, rootReducer);
@@ -20,14 +27,15 @@ const sagaMiddleware = createSagaMiddleware();
 export const store = configureStore({
   reducer: persistedReducer,
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware({ serializableCheck: false, thunk: false }).concat(
-      sagaMiddleware,
-    ),
+    getDefaultMiddleware({ serializableCheck: false, thunk: false })
+      .concat(sagaMiddleware)
+      // .concat(logger),
 });
 
 sagaMiddleware.run(rootSaga);
 
 export const persistor = persistStore(store);
+// persistor.purge()
 
 export type AppStore = typeof store;
 

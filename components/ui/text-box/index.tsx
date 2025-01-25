@@ -7,11 +7,29 @@ interface TextboxProps extends TextInputProps {
   labelClassName?: string;
 }
 
-const Textbox = ({ label, className, labelClassName, ...rest  }: TextboxProps) => {
+const Textbox = ({
+  label,
+  className,
+  labelClassName,
+  placeholder,
+  ...rest
+}: TextboxProps) => {
   return (
     <View>
-      <Text className={cn('text-sm capitalize font-semibold mb-1', labelClassName)}>{label}</Text>
-      <TextInput className={cn("w-full min-w-full p-3 border border-black rounded-lg", className)} {...rest}/>
+      <Text
+        className={cn("text-sm capitalize font-semibold mb-1", labelClassName)}
+      >
+        {label}
+      </Text>
+      <TextInput
+        placeholder={placeholder ?? label}
+        className={cn(
+          "w-full min-w-full p-3 border border-black rounded-lg",
+          !placeholder && "placeholder:text-transparent",
+          className,
+        )}
+        {...rest}
+      />
     </View>
   );
 };

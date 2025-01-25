@@ -1,10 +1,16 @@
-import { Text, TouchableOpacity, TouchableOpacityProps } from "react-native";
+import {
+  ActivityIndicator,
+  Text,
+  TouchableOpacity,
+  TouchableOpacityProps,
+} from "react-native";
 
 import { cn } from "@/utils/tw-merge";
 
 interface Props extends TouchableOpacityProps {
   textClassName?: string;
   text?: string;
+  isLoading?: boolean;
 }
 
 const Button = ({
@@ -12,6 +18,7 @@ const Button = ({
   className,
   textClassName,
   text,
+  isLoading,
   ...rest
 }: Props) => {
   return (
@@ -23,9 +30,13 @@ const Button = ({
         className,
       )}
     >
-      <Text className={cn("text-white font-semibold text-sm", textClassName)}>
-        {children ?? text}
-      </Text>
+      {isLoading ? (
+        <ActivityIndicator />
+      ) : (
+        <Text className={cn("text-white font-semibold text-sm", textClassName)}>
+          {children ?? text}
+        </Text>
+      )}
     </TouchableOpacity>
   );
 };

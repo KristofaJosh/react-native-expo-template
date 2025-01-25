@@ -13,6 +13,9 @@
 - **Focus on logic**, but make the app look as good as possible given the limited time. 
 - You may use RNE or something similar.
 
+BONUS
+- Add detox (equivalent to playwright for web) tests for the app.
+
 
 This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
 

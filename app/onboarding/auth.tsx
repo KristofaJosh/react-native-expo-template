@@ -1,14 +1,16 @@
-import { Link, router } from "expo-router";
+import { Link } from "expo-router";
+import { StatusBar } from "expo-status-bar";
 import { trim } from "ramda";
 import { useState } from "react";
 import { Image, Text, View } from "react-native";
 
 import Button from "@/components/ui/button";
 import Textbox from "@/components/ui/text-box";
-import { useAppDispatch } from "@/hooks/redux";
-import { loginUser } from "@/reducers/auth/reducer";
+import { useAppDispatch, useAppSelector } from "@/hooks/redux";
+import { getAuthIsLoading, loginUser } from "@/reducers/auth/reducer";
 
 const Auth = () => {
+  const isLoading = useAppSelector(getAuthIsLoading);
   const dispatch = useAppDispatch();
 
   const [inputState, setInputState] = useState({ username: "", password: "" });
@@ -16,11 +18,11 @@ const Auth = () => {
   const handleLogin = () => {
     if (!trim(inputState?.username)) return;
     dispatch(loginUser(inputState));
-    router.replace("/(app)");
   };
 
   return (
     <>
+      <StatusBar style={'light'} />
       <View className={"flex-1 bg-gray-100"}>
         <View className={"items-center h-full gap-8"}>
           <View
@@ -67,7 +69,7 @@ const Auth = () => {
               />
             </View>
             <View className={"gap-4"}>
-              <Button onPress={handleLogin}>Login</Button>
+              <Button onPress={handleLogin} isLoading={isLoading}>Login</Button>
             </View>
             <View>
               <Text className={"text-center text-sm text-gray-500 px-1"}>
