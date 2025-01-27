@@ -1,0 +1,8 @@
+# https://maestro.mobile.dev/getting-started
+appId: com.chrisjosh.rnpractice
+---
+- launchApp:
+    clearState: true
+- runFlow: onboarding.yml
+- runFlow: home.yml
+- runFlow: explore.yml

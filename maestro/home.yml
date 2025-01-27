@@ -1,6 +1,5 @@
 appId: com.chrisjosh.rnpractice
 ---
-- launchApp
 - assertVisible: 'Good day, Test user'
 - scroll
 - tapOn:
@@ -8,4 +7,4 @@ appId: com.chrisjosh.rnpractice
     repeat: 2
     delay: 2000
 - tapOn:
-    text: 'Explore'
+    text: 'Explore, tab, 2 of 3'

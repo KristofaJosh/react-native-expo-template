@@ -2,7 +2,6 @@
 
 appId: com.chrisjosh.rnpractice
 ---
-- launchApp
 - assertVisible: "Artify"
 - assertVisible: "Welcome"
 - assertVisible: "Skip"

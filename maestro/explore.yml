@@ -1,0 +1,18 @@
+appId: com.chrisjosh.rnpractice
+---
+- tapOn:
+    text: 'Explore, tab, 2 of 3'
+- assertVisible: 'Explore'
+- swipe:
+    direction: DOWN
+    duration: 3000      # Values are in ms.
+- assertVisible:
+    id: 'refreshing'
+- scrollUntilVisible:
+    element:
+      id: "viewId" # or any other selector
+    direction: DOWN # DOWN|UP|LEFT|RIGHT (optional, default: DOWN)
+    timeout: 50000 # (optional, default: 20000) ms
+    speed: 40 # 0-100 (optional, default: 40) Scroll speed. Higher values scroll faster.
+    visibilityPercentage: 100 # 0-100 (optional, default: 100) Percentage of element visible in viewport
+    centerElement: false # true|false (optional, default: false)

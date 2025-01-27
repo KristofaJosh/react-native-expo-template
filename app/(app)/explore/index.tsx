@@ -48,8 +48,8 @@ const Explore = () => {
     <View className={"flex-1 p-4 relative bg-white"}>
       <Typography className={"text-2xl font-semibold py-4"}>Explore</Typography>
       {loading && (
-        <View className={"justify-center items-center h-[80%] w-full"}>
-          <ActivityIndicator />
+        <View id={'refreshing'} className={"justify-center items-center h-[80%] w-full"}>
+          <ActivityIndicator id={'refreshing'} />
         </View>
       )}
       <FlatList
